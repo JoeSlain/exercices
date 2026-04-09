@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programme d'Exercices</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:          #F4F0E9;
+      --card:        #FFFFFF;
+      --ink:         #121010;
+      --ink-2:       #3D3A37;
+      --ink-3:       #8A837A;
+      --accent:      #C8391A;
+      --accent-dim:  #F0E8E5;
+      --rule:        #D8D2CA;
+      --shadow:      0 1px 2px rgba(0,0,0,.05), 0 3px 10px rgba(0,0,0,.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ─── PAGE WRAPPER ─── */
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 52px 44px;
+    }
+
+    /* ─── HEADER ─── */
+    .header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding-bottom: 18px;
+      border-bottom: 2.5px solid var(--ink);
+    }
+
+    .header h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 52px;
+      line-height: .95;
+      letter-spacing: -1.5px;
+      text-transform: uppercase;
+    }
+
+    .header h1 span {
+      color: var(--accent);
+    }
+
+    .header-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 6px;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      line-height: 1.8;
+    }
+
+    /* ─── SECTION ─── */
+    .section { margin-bottom: 40px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .section-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 72px;
+      line-height: 1;
+      letter-spacing: -3px;
+      color: var(--accent);
+      min-width: 58px;
+    }
+
+    .section-titles {
+      border-left: 2px solid var(--rule);
+      padding-left: 16px;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .section-desc {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 3px;
+    }
+
+    /* ─── CARD ─── */
+    .card {
+      background: var(--card);
+      border-radius: 5px;
+      box-shadow: var(--shadow);
+      padding: 16px 20px;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 18px;
+      align-items: flex-start;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      border-left: 3px solid transparent;
+      transition: border-color .15s;
+    }
+    .card:hover { border-left-color: var(--accent); }
+
+    .card-body { flex: 1; min-width: 0; }
+
+    .card-top {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .ex-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .2px;
+      text-transform: uppercase;
+    }
+
+    .ex-en {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    .badge {
+      margin-left: auto;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: var(--accent);
+      color: #fff;
+      padding: 3px 10px 2px;
+      border-radius: 2px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .note {
+      font-size: 12.5px;
+      font-style: italic;
+      color: var(--ink-2);
+      line-height: 1.55;
+      margin-top: 6px;
+    }
+
+    .target {
+      display: inline-block;
+      margin-top: 7px;
+      font-size: 10.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      padding: 2px 8px;
+    }
+
+    /* ─── IMAGES (right side of card) ─── */
+    .card-imgs {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+      align-items: center;
+    }
+
+    .card-imgs img {
+      height: 108px;
+      width: auto;
+      max-width: 150px;
+      object-fit: contain;
+      border-radius: 4px;
+      border: 1px solid var(--rule);
+      background: var(--bg);
+      display: block;
+    }
+
+    /* ─── SUBSECTION DIVIDER ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 22px 0 10px;
+    }
+
+    .divider-rule { flex: 1; height: 1px; background: var(--rule); }
+
+    .divider-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 10.5px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+    }
+
+    /* ─── PRINT ─── */
+    @media print {
+      :root {
+        --bg: #fff;
+        --card: #fff;
+        --shadow: none;
+        --accent: #b02e14;
+      }
+      body { background: white; }
+      .page { padding: 0; max-width: 100%; }
+      .header { margin-bottom: 20px; }
+      .header h1 { font-size: 38px; }
+      .section-num { font-size: 52px; min-width: 44px; }
+      .section { margin-bottom: 24px; }
+      .card {
+        box-shadow: none;
+        border: 1px solid #DDD8D2;
+        border-left: 3px solid var(--accent);
+        padding: 10px 14px;
+        margin-bottom: 5px;
+      }
+      .card-imgs img { height: 80px; }
+      .ex-name { font-size: 15px; }
+      .note { font-size: 11px; }
+      @page { margin: 1.4cm; size: A4; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div>
+      <h1>Programme<br><span>d'Exercices</span></h1>
+      <div class="header-sub">Mobilité · Stabilité · Renforcement</div>
+    </div>
+    <div class="header-meta">
+      Protocole personnel<br>
+      Physiothérapie
+    </div>
+  </header>
+
+  <!-- ═══ SECTION 01 ═══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-titles">
+        <div class="section-title">Mobilité &amp; Étirements</div>
+        <div class="section-desc">Calmer le système</div>
+      </div>
+    </div>
+
+    <!-- Psoas -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Étirement Psoas &amp; Carré des Lombes</span>
+          <span class="badge">30 s / côté</span>
+        </div>
+        <div class="note">En fente, genou gauche au sol — levez le bras gauche au ciel et inclinez-vous légèrement vers la droite.</div>
+      </div>
+    </div>
+
+    <!-- Doorway -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Ouverture de Poitrine</span>
+          <span class="ex-en">Doorway Stretch</span>
+          <span class="badge">30 s</span>
+        </div>
+        <div class="note">Bras en croix dans l'encadrement d'une porte pour étirer les pectoraux.</div>
+      </div>
+    </div>
+
+    <!-- Piriformis -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Piriforme</span>
+          <span class="ex-en">Piriformis Stretch</span>
+          <span class="badge">2 × 30 s</span>
+        </div>
+      </div>
+      <div class="card-imgs">
+        <img src="assets/Piriformis-Stretch.gif" alt="Piriformis Stretch">
+      </div>
+    </div>
+
+    <!-- McKenzie -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Extension Lombaire</span>
+          <span class="ex-en">McKenzie</span>
+          <span class="badge">10 reps</span>
+        </div>
+      </div>
+      <div class="card-imgs">
+        <img src="assets/mckenzi-lumbar-extension.gif" alt="McKenzie Lumbar Extension">
+      </div>
+    </div>
+
+    <!-- Thoracic Rotation -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Rotation Thoracique</span>
+          <span class="ex-en">Thoracic Rotation Mobility</span>
+          <span class="badge">10 reps</span>
+        </div>
+      </div>
+      <div class="card-imgs">
+        <img src="assets/thoracic-rotation-1.gif" alt="Thoracic Rotation 1">
+        <img src="assets/thoracic-rotation-2.gif" alt="Thoracic Rotation 2">
+        <img src="assets/thoracic-rotation-3.gif" alt="Thoracic Rotation 3">
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SECTION 02 ═══ -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-titles">
+        <div class="section-title">Renforcement &amp; Stabilité</div>
+        <div class="section-desc">Rééquilibrer</div>
+      </div>
+    </div>
+
+    <!-- Wall Slide -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Wall Slide</span>
+          <span class="badge">3 × 10</span>
+        </div>
+        <div class="note">Dos au mur — faites glisser vos bras en "W" sans décoller coudes ni poignets.</div>
+        <span class="target">Scapula · Trapèze inférieur</span>
+      </div>
+    </div>
+
+    <!-- Clamshells -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Clamshells</span>
+          <span class="ex-en">Coquillages</span>
+          <span class="badge">3 × 15</span>
+        </div>
+        <div class="note">Allongé sur le côté droit, genoux pliés — levez le genou gauche sans bouger le bassin.</div>
+        <span class="target">Moyen fessier</span>
+      </div>
+      <div class="card-imgs">
+        <img src="assets/clamshells.gif" alt="Clamshells">
+      </div>
+    </div>
+
+    <!-- Dead Bug -->
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Dead Bug</span>
+          <span class="badge">3 × 12</span>
+        </div>
+        <div class="note">Sur le dos — alternez jambe et bras opposés sans creuser le dos.</div>
+        <span class="target">Gainage profond</span>
+      </div>
+      <div class="card-imgs">
+        <img src="assets/dead-bug.gif" alt="Dead Bug">
+      </div>
+    </div>
+
+    <!-- Subsection: Moyen Fessier -->
+    <div class="divider">
+      <div class="divider-rule"></div>
+      <div class="divider-label">Moyen Fessier — Gluteus Medius</div>
+      <div class="divider-rule"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Hip Thrust Unilatéral</span>
+          <span class="ex-en">Single-Leg Hip Thrust</span>
+          <span class="badge">3 × 10</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subsection: Gainage Latéral -->
+    <div class="divider">
+      <div class="divider-rule"></div>
+      <div class="divider-label">Gainage Latéral</div>
+      <div class="divider-rule"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Side Plank</span>
+          <span class="ex-en">Lateral Core Stability</span>
+          <span class="badge">3 × 30 s</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subsection: Scapula -->
+    <div class="divider">
+      <div class="divider-rule"></div>
+      <div class="divider-label">Scapula — Stabilisateurs</div>
+      <div class="divider-rule"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Row</span>
+          <span class="ex-en">Horizontal Pulling</span>
+          <span class="badge">3 × 15</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Y-T-W</span>
+          <span class="ex-en">Lower Trap Activation</span>
+          <span class="badge">3 × 12</span>
+        </div>
+      </div>
+      <div class="card-imgs">
+        <img src="assets/YTW.gif" alt="Y-T-W">
+      </div>
+    </div>
+
+    <!-- Subsection: Anti-rotation -->
+    <div class="divider">
+      <div class="divider-rule"></div>
+      <div class="divider-label">Anti-Rotation — Core</div>
+      <div class="divider-rule"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <div class="card-top">
+          <span class="ex-name">Pallof Press</span>
+          <span class="ex-en">Anti-Rotation Core</span>
+          <span class="badge">3 × 12</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# System
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Obsidian
+.obsidian/
+*.cache/
+
+# Node (if added later)
+node_modules/
+.env.local
