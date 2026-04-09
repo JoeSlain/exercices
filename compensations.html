@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mécanismes de Compensations</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:          #F4F0E9;
+      --card:        #FFFFFF;
+      --ink:         #121010;
+      --ink-2:       #3D3A37;
+      --ink-3:       #8A837A;
+      --accent:      #C8391A;
+      --accent-dim:  #F0E8E5;
+      --rule:        #D8D2CA;
+      --shadow:      0 1px 2px rgba(0,0,0,.05), 0 3px 10px rgba(0,0,0,.04);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 52px 44px;
+    }
+
+    /* ─── HEADER ─── */
+    .header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      padding-bottom: 18px;
+      border-bottom: 2.5px solid var(--ink);
+    }
+
+    .header h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 52px;
+      line-height: .95;
+      letter-spacing: -1.5px;
+      text-transform: uppercase;
+    }
+
+    .header h1 span {
+      color: var(--accent);
+    }
+
+    .header-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 6px;
+    }
+
+    .header-meta {
+      text-align: right;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      line-height: 1.8;
+    }
+
+    /* ─── INTRO ─── */
+    .intro {
+      background: var(--card);
+      border-left: 4px solid var(--accent);
+      padding: 20px 22px;
+      margin-bottom: 32px;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+    }
+
+    .intro p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink-2);
+    }
+
+    /* ─── MECHANISM CARD ─── */
+    .mechanism {
+      margin-bottom: 28px;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .mech-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .mech-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 48px;
+      line-height: 1;
+      color: var(--accent);
+      letter-spacing: -2px;
+      min-width: 52px;
+    }
+
+    .mech-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .mech-subtitle {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 300;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 2px;
+    }
+
+    /* ─── SUBSECTIONS ─── */
+    .subsec {
+      background: var(--card);
+      border-radius: 5px;
+      box-shadow: var(--shadow);
+      padding: 16px 20px;
+      margin-bottom: 10px;
+    }
+
+    .subsec-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .subsec-content {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+
+    .subsec-content strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ─── IMAGES ─── */
+    .mech-images {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+      justify-content: center;
+    }
+
+    .mech-images img {
+      max-height: 200px;
+      max-width: 100%;
+      border-radius: 5px;
+      border: 1px solid var(--rule);
+      object-fit: contain;
+      background: var(--bg);
+    }
+
+    /* ─── SYNTHESIS ─── */
+    .synthesis {
+      background: linear-gradient(135deg, var(--accent-dim) 0%, rgba(200,57,26,.04) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 6px;
+      padding: 24px;
+      margin-top: 36px;
+    }
+
+    .synthesis-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--accent);
+    }
+
+    .synthesis p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--ink-2);
+    }
+
+    .synthesis strong {
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* ─── NAVIGATION ─── */
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--rule);
+    }
+
+    .nav-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--accent);
+      transition: opacity .2s;
+    }
+
+    .nav-link:hover {
+      opacity: .7;
+    }
+
+    /* ─── PRINT ─── */
+    @media print {
+      :root {
+        --bg: #fff;
+        --card: #fff;
+        --shadow: none;
+        --accent: #b02e14;
+      }
+      body { background: white; }
+      .page { padding: 0; max-width: 100%; }
+      .header { margin-bottom: 20px; }
+      .header h1 { font-size: 38px; }
+      .mechanism { margin-bottom: 20px; }
+      .mech-num { font-size: 36px; min-width: 40px; }
+      .subsec {
+        box-shadow: none;
+        border: 1px solid #DDD8D2;
+        padding: 10px 14px;
+        margin-bottom: 6px;
+      }
+      .subsec-title { font-size: 12px; }
+      .subsec-content { font-size: 11px; }
+      .mech-images img { max-height: 140px; }
+      .synthesis { border-width: 1px; padding: 16px; }
+      .nav-footer { display: none; }
+      @page { margin: 1.4cm; size: A4; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div>
+      <h1>Mécanismes<br><span>de Compensations</span></h1>
+      <div class="header-sub">Analyse structurelle et fonctionnelle</div>
+    </div>
+    <div class="header-meta">
+      Diagnostic personnalisé<br>
+      Chaîne cinétique
+    </div>
+  </header>
+
+  <!-- ═══ INTRO ═══ -->
+  <div class="intro">
+    <p><strong>Synthèse complète</strong> fusionnant l'approche structurelle (tissus touchés) et l'approche fonctionnelle (mécanismes de mouvement). Ces compensations créent une chaîne d'effets en cascade qui expliquent vos douleurs.</p>
+  </div>
+
+  <!-- ═══ MECHANISM 1 ═══ -->
+  <section class="mechanism">
+    <div class="mech-header">
+      <div class="mech-num">01</div>
+      <div>
+        <div class="mech-title">Appui sur le Coude Gauche</div>
+        <div class="mech-subtitle">Left Elbow — Lateral Epicondyle Region</div>
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">💠 Impact Structurel</div>
+      <div class="subsec-content">
+        Provoque une <strong>compression articulaire</strong> et un stress du <strong>complexe ligamentaire latéral</strong>. La sollicitation constante pour stabiliser le bras entraîne une suractivation des <strong>extenseurs du poignet</strong>, menant à une tendinopathie.
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">⛓️ Réaction en Chaîne</div>
+      <div class="subsec-content">
+        Cet appui agit comme un pilier qui force l'<strong>élévation de la scapula</strong> gauche et une <strong>inclinaison latérale de la colonne vertébrale</strong>. L'équilibre segmentaire est rompu.
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">↓ Conséquence Distale</div>
+      <div class="subsec-content">
+        Cette inclinaison courbe le bas du dos, compressant les <strong>vertèbres lombaires</strong>, ce qui peut irriter directement la racine nerveuse et déclencher des <strong>douleurs irradiantes</strong>.
+      </div>
+    </div>
+
+    <div class="mech-images">
+      <img src="assets/Pasted image 20260404171121.png" alt="Appui coude gauche">
+    </div>
+  </section>
+
+  <!-- ═══ MECHANISM 2 ═══ -->
+  <section class="mechanism">
+    <div class="mech-header">
+      <div class="mech-num">02</div>
+      <div>
+        <div class="mech-title">Épaules Enroulées + Tête Projetée</div>
+        <div class="mech-subtitle">Rounded Shoulders + Forward Head Posture</div>
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">💠 Déséquilibre Musculaire</div>
+      <div class="subsec-content">
+        Le <strong>trapèze supérieur</strong> et l'<strong>élévateur de la scapula</strong> deviennent hyperactifs pour compenser la faiblesse des <strong>fixateurs scapulaires</strong>. Cela génère une <strong>compression cervicale</strong> constante.
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">✂️ L'Effet "Ciseaux"</div>
+      <div class="subsec-content">
+        La <strong>scapula</strong> gauche perd son ancrage et n'est plus plaquée contre les <strong>côtes</strong>. Ce défaut de glissement (protraction) force le trapèze supérieur à se contracter en permanence pour "retenir" l'épaule dans le vide.
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">↓ Conséquence Locale</div>
+      <div class="subsec-content">
+        Cette tension chronique crée un <strong>point douloureux vif</strong> et une <strong>sensation de brûlure entre les omoplates</strong>. Les muscles restent figés.
+      </div>
+    </div>
+
+    <div class="mech-images">
+      <img src="assets/Pasted image 20260404171531.png" alt="Épaules enroulées">
+      <img src="assets/Pasted image 20260405171539.png" alt="Élévateur de la scapula">
+    </div>
+  </section>
+
+  <!-- ═══ MECHANISM 3 ═══ -->
+  <section class="mechanism">
+    <div class="mech-header">
+      <div class="mech-num">03</div>
+      <div>
+        <div class="mech-title">Rotation + Affaissement Gauche</div>
+        <div class="mech-subtitle">Left Pelvic Drop + Rotation</div>
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">💠 Architecture du Bassin</div>
+      <div class="subsec-content">
+        Le <strong>bassin</strong> est maintenu en rotation asymétrique. Suractivation de "protection" du <strong>carré des lombes</strong> et du <strong>piriforme</strong>, tandis que le <strong>moyen fessier</strong> est inhibé (mise au repos forcée).
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">⏸️ L'Amnésie des Fessiers</div>
+      <div class="subsec-content">
+        La position assise prolongée désactive les <strong>fessiers</strong>. C'est l'"amnésie des fessiers" — les muscles perdent leur capacité de activation et d'enracinement.
+      </div>
+    </div>
+
+    <div class="subsec">
+      <div class="subsec-title">↓ Conséquence en Course</div>
+      <div class="subsec-content">
+        Lors de l'effort, le bassin n'est plus soutenu et "tombe" du côté opposé à chaque foulée. Le <strong>genou gauche</strong> est forcé de compenser en <strong>pivotant vers l'intérieur</strong> (rotation interne / valgus dynamique), ce qui sature le tendon du genou.
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SYNTHESIS ═══ -->
+  <section class="synthesis">
+    <div class="synthesis-title">🎯 Synthèse Opérationnelle</div>
+    <p>
+      Votre <strong>douleur au genou</strong> et votre <strong>sciatique</strong> ne sont pas des problèmes isolés. Ils sont le résultat direct de l'<strong>effondrement de votre bassin</strong> et de votre <strong>colonne</strong>, initié par la position de votre <strong>coude</strong> et de votre <strong>épaule</strong>.
+    </p>
+    <p style="margin-top: 12px;">
+      La chaîne cinétique est <strong>break</strong> au point d'appui (coude) → se propage jusqu'aux épaules → déstabilise le bassin → surcharge le genou. Les exercices du premier programme ciblent ces défaillances en cascade pour rétablir l'équilibre segmentaire.
+    </p>
+  </section>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <div class="nav-footer">
+    <a href="index.html" class="nav-link">← Programme d'Exercices</a>
+    <span style="font-family: 'Barlow Condensed'; font-weight: 300; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-3);">2/2</span>
+  </div>
+
+</div>
+</body>
+</html>
